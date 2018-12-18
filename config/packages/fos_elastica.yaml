@@ -1,0 +1,19 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    serializer:
+        serializer: jms_serializer
+    indexes:
+        ememo:
+            client: default
+            types:
+                _doc:
+                    properties:
+                        idDocumento: ~
+                        dsDocumento: { boost: 10, analyzer: elastica-analyzer}
+                        dtDocumento: ~
+                        idTipoDocumento: ~
+
+
+
