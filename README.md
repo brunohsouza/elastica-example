@@ -1,8 +1,6 @@
 # elastica-example
 Symfony REST API bundle example based on Elastica 
 
-Symfony REST API bundle example based on Elastica 
-
 Study case for ElasticSearch and Elastica with Symfony framework and FOSRestBundle.
 
 This study case is under construction and is not finallized yet.
