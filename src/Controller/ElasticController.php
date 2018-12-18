@@ -29,15 +29,6 @@ class ElasticController extends Controller
     private $objElasticService;
 
     /**
-     * Create Index
-     * @FOSRest\Post("/index")
-     */
-    public function createIndex()
-    {
-        return new Response('', 405);
-    }
-
-    /**
      * Create a document based on parameters given
      * @param $index
      * @param $type
@@ -105,7 +96,7 @@ class ElasticController extends Controller
             $container = $this->get("fos_elastica.index.$index.$type");
             $this->objElasticService = new ElasticService($container);
             $parameters = $request->query->getIterator();
-            $response = $this->objElasticService->match($parameters);
+            $response = $this->objElasticService->search($parameters);
 
             return $this->json($response);
         } catch(\Exception $exception) {
@@ -144,7 +135,7 @@ class ElasticController extends Controller
         try {
             $container = $this->get("fos_elastica.index.$index.$type");
             $this->objElasticService = new ElasticService($container);
-            $parameters = $request->query->getIterator();
+            $parameters = $request->query->all();
             $response = $this->objElasticService->match($parameters);
 
             return $this->json($response);
