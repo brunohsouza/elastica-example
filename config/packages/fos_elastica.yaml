@@ -14,6 +14,20 @@ fos_elastica:
                         dsDocumento: { boost: 10, analyzer: elastica-analyzer}
                         dtDocumento: ~
                         idTipoDocumento: ~
+        my-store:
+            client: default
+            types:
+                docs:
+                    properties:
+                        primaryKey: ~
+                        dsPk: ~
+                        dsDocumento: ~
+                        dtDocumento: ~
+                        nuProtocolo: ~
+                        coUsuario: ~
+                        idTipoDocumento: ~
+                        noTipoDocumento: ~
+                        idSistema: ~
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use Elastica\Bulk;
 use Elastica\Document;
 use Elastica\Index;
 use Elastica\Query;
@@ -11,7 +12,7 @@ use Elastica\Response;
 use Elastica\Script\Script;
 use Elastica\Type;
 
-class ElasticService
+class DocumentService
 {
     /**
      * Container service object contains the Index  or Type object
@@ -20,7 +21,7 @@ class ElasticService
     private $container;
 
     /**
-     * ElasticService constructor. Receives and add value to the container service
+     * DocumentService constructor. Receives and add value to the container service
      * @param $container
      */
     public function __construct($container)
@@ -175,5 +176,27 @@ class ElasticService
         $document->setType($this->container->getName());
 
         return $this->container->deleteById($id)->getData();
+    }
+
+    /**
+     * Populates the index with the parameters given as array
+     * @param array $params
+     * @return Bulk\Response[]
+     * @throws \Exception
+     */
+    public function populate($params)
+    {
+        $arrDocuments = [];
+        foreach ($params as $data) {
+            $arrDocuments[] = $this->container->createDocument('', $data);
+        }
+        if (empty($arrDocuments)) {
+            throw new \Exception('No data to be indexed');
+        }
+        $client = $this->container->getIndex()->getClient();
+        $bulk = new Bulk($client);
+        $bulk->setType($this->container->getName());
+        $bulk->addDocuments($arrDocuments);
+        return $bulk->send()->getData()['items'];
     }
 }
