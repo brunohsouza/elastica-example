@@ -5,15 +5,15 @@ fos_elastica:
     serializer:
         serializer: jms_serializer
     indexes:
-        ememo:
+        articles:
             client: default
             types:
                 _doc:
                     properties:
-                        idDocumento: ~
-                        dsDocumento: { boost: 10, analyzer: elastica-analyzer}
-                        dtDocumento: ~
-                        idTipoDocumento: ~
+                        documentId: ~
+                        documentDesc: { boost: 10, analyzer: elastica-analyzer}
+                        documentDate: ~
+                        documentType: ~
         my-store:
             client: default
             types:
@@ -21,13 +21,13 @@ fos_elastica:
                     properties:
                         primaryKey: ~
                         dsPk: ~
-                        dsDocumento: ~
-                        dtDocumento: ~
-                        nuProtocolo: ~
-                        coUsuario: ~
-                        idTipoDocumento: ~
-                        noTipoDocumento: ~
-                        idSistema: ~
+                        documentDesc: ~
+                        documentDt: ~
+                        protocolNumb: ~
+                        user: ~
+                        documentTypeId: ~
+                        documentTypeName: ~
+                        systemId: ~
 
 
 
